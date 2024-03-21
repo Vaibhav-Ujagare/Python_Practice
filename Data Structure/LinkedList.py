@@ -73,6 +73,13 @@ class Node:
             self.insert_at_end(data)
 
     def insert_after_value(self,data_after,data_to_insert):
+        if self.head is None:
+            return
+
+        if self.head.data==data_after:
+            self.head.next = Node(data_to_insert,self.head.next)
+            return
+        
         itr = self.head
         while itr:
             if itr.data == data_after:
@@ -82,17 +89,20 @@ class Node:
             itr = itr.next
 
     def remove_by_value(self,data):
-        itr = self.head
-        llstr=''
       
-        while itr: 
-            suffix="-->"            
-            if itr.data != data:                                 
-                llstr+=str(itr.data)+suffix          
-                suffix=""                 
-            itr = itr.next
+        if self.head is None:
+            return
+
+        if self.head.data == data:
+            self.head = self.head.next
+            return
         
-        print(llstr)
+        itr = self.head
+        while itr.next:
+            if itr.next.data == data:
+                itr.next = itr.next.next
+                break
+            itr = itr.next
 
             
         
@@ -102,4 +112,5 @@ if __name__ == '__main__':
     root.insert_bulk_values(["a","b","v"])
     root.print()
     root.remove_by_value("v")
+    root.print()
     print(root.get_length())
