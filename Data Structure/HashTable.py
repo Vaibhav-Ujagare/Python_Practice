@@ -27,12 +27,18 @@ class HashTable:
 
 
 
+    def __delitem__(self,key):
+        arr_index = self.get_hash(key)
+        for index,kv in enumerate(self.arr[arr_index]):
+            if kv[0] == key:
+                del self.arr[arr_index][index]
 
 if __name__=="__main__":
     t = HashTable()
-    
+    t['march 1'] = 11
     t['march 6'] = 322
     t['march 17'] = 3221
     t['march 26'] = 32
+    del t['march 26']
 
-    print(t['march 26'])
+    print(t.arr)
